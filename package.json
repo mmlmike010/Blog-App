@@ -1,12 +1,12 @@
 {
   "name": "blogapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a made up blog app utilizing RESTfoul routing along with mongoDB to let users, create, respond, update, and delete. This is one of the many apps I have created throughout a bootcamp class just to work with the basics of fullstack. ",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Michael Lacsamana",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",

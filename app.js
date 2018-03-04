@@ -2,12 +2,16 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
+//in order to update
+var methodOverride = require("method-override");
 
 
 mongoose.connect("mongodb://localhost/restful_blog_app");
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
+//in order to update
+app.use(methodOverride("_method"));
 //title
 //image
 //body
@@ -92,6 +96,28 @@ app.get("/blogs/:id/edit", function(req,res){
 });
 
 //update
+app.put("/blogs/:id", function(req,res){
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
+       if(err){
+           res.redirect("/blogs");
+       } else{
+           res.redirect("/blogs/" + req.params.id);
+       }
+    });
+});
+
+//DELETE route
+app.delete("/blogs/:id", function(req,res){
+    //destroy blog
+    Blog.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/blogs");
+        } else{
+            res.redirect("/blogs");
+        }
+    });
+    //redirect somewhere
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("blog app has started");
